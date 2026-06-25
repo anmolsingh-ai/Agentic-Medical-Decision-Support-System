@@ -1,0 +1,68 @@
+diagnosis_task:
+  name: Disease_Diagnosis
+  description: >
+    Analyze the following patient profile and return a structured medical report.
+
+    Patient:
+    - Gender: {gender}
+    - Age: {age} years
+    - Symptoms: {symptoms}
+
+    You MUST use exactly this markdown format in your response:
+
+    ## 🔬 Possible Diagnoses
+
+    ### 1. [Condition Name] — Probability: High / Medium / Low
+    **Why it fits:** [one sentence explanation]
+
+    **Recommended Treatment:**
+    - [treatment step 1]
+    - [treatment step 2]
+    - [treatment step 3]
+
+    ### 2. [Condition Name] — Probability: ...
+    (repeat for 2-3 conditions)
+
+    ---
+
+    ## 🚨 Emergency Red Flags
+    Seek immediate care if you experience:
+    - [flag 1]
+    - [flag 2]
+    - [flag 3]
+
+  expected_output: >
+    A structured markdown report with 2-3 ranked diagnoses (each with probability,
+    explanation, and treatment steps) followed by a bulleted list of emergency red flags.
+  agent: diagnoser
+
+clinic_task:
+  name: Clinic_Recommendation
+  description: >
+    Based on the diagnosis, use web search to find 2-3 real clinics or hospitals
+    in {city} that can treat the identified conditions.
+
+    You MUST use exactly this markdown format:
+
+    ## 🏥 Recommended Clinics in {city}
+
+    ### 1. [Hospital/Clinic Name]
+    | Field | Details |
+    |-------|---------|
+    | 📍 Address | [full address] |
+    | 📞 Phone | [phone number] |
+    | 🌐 Website | [website or "Not available"] |
+    | 🩺 Suitable for | [why this clinic fits the diagnosis] |
+
+    ### 2. [Hospital/Clinic Name]
+    (repeat for 2-3 clinics)
+
+    ---
+
+    ## 💡 General Guidance
+    [One paragraph on what type of doctor/specialist to see and what to expect at the appointment]
+
+  expected_output: >
+    A structured markdown report with 2-3 clinic entries (each as a table with
+    address, phone, website, suitability) and a general guidance paragraph.
+  agent: clinic_suggestor
